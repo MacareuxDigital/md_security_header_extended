@@ -8,6 +8,9 @@ Ref: [CVE-2021-22954 and mitigations below Concrete Version 9](https://www.concr
 ## Supported Headers
 
 * `Cross-Origin-Resource-Policy` (CORP) 
+* `Cross-Origin-Opener-Policy` (COOP)
+* `Cross-Origin-Embedder-Policy` (COEP)
+* `Access-Control-Allow-Origin`
 
 ## Headers supported by core
 
@@ -17,8 +20,5 @@ Ref: [CVE-2021-22954 and mitigations below Concrete Version 9](https://www.concr
 
 ## Todo
 
-* `X-XSS-Protection`
+* ~~`X-XSS-Protection`~~ (Recommended not to set)
 * `X-Content-Type-Options`
-* `Access-Control-Allow-Origin`
-* `Cross-Origin-Opener-Policy` (COOP)
-* `Cross-Origin-Embedder-Policy` (COEP)
