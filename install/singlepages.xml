@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<concrete5-cif version="1.0">
+    <singlepages>
+        <page name="Security Header Extended"
+              path="/dashboard/system/environment/security_header_extended"
+              filename="/dashboard/system/environment/security_header_extended.php"
+              pagetype=""
+              description=""
+              package="md_security_header_extended"/>
+    </singlepages>
+</concrete5-cif>
