@@ -1,7 +1,9 @@
 # Concrete CMS Package: Macareux Security Header Extended
 
 Add security header to mitigate some types of attacks.
-If you consider to mitigate `CVE-2021-22954` without editing server configuration, you can use this add-on.
+
+If you consider to mitigate `CVE-2021-22954` without editing server configuration, you can use this add-on.  
+Ref: [CVE-2021-22954 and mitigations below Concrete Version 9](https://www.concretecms.com/about/blog/security/cve-2021-22954-and-mitigations-below-concrete-version-9)
 
 ## Supported Headers
 
