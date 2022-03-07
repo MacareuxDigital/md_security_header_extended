@@ -7,7 +7,7 @@ use Concrete\Core\Http\Middleware\MiddlewareInterface;
 use Concrete\Core\Utility\Service\Validation\Strings;
 use Symfony\Component\HttpFoundation\Request;
 
-class CrossOriginResourcePolicyMiddleware implements MiddlewareInterface
+class CrossOriginEmbedderPolicyMiddleware implements MiddlewareInterface
 {
     /**
      * @var Strings
@@ -32,9 +32,9 @@ class CrossOriginResourcePolicyMiddleware implements MiddlewareInterface
     {
         $response = $frame->next($request);
 
-        if ($response->headers->has('Cross-Origin-Resource-Policy') === false) {
+        if ($response->headers->has('Cross-Origin-Embedder-Policy') === false) {
             if ($this->stringValidator->notempty($this->config)) {
-                $response->headers->set('Cross-Origin-Resource-Policy', $this->config);
+                $response->headers->set('Cross-Origin-Embedder-Policy', $this->config);
             }
         }
 

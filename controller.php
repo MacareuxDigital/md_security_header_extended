@@ -4,6 +4,9 @@ namespace Concrete\Package\MdSecurityHeaderExtended;
 
 use Concrete\Core\Http\ServerInterface;
 use Concrete\Core\Package\Package;
+use Macareux\SecurityHeaderExtended\Http\Middleware\AccessControlAllowOriginPolicyMiddleware;
+use Macareux\SecurityHeaderExtended\Http\Middleware\CrossOriginEmbedderPolicyMiddleware;
+use Macareux\SecurityHeaderExtended\Http\Middleware\CrossOriginOpenerPolicyMiddleware;
 use Macareux\SecurityHeaderExtended\Http\Middleware\CrossOriginResourcePolicyMiddleware;
 
 class Controller extends Package
@@ -27,7 +30,7 @@ class Controller extends Package
      *
      * @var string
      */
-    protected $pkgVersion = '0.0.1';
+    protected $pkgVersion = '0.0.2';
 
     /**
      * @see https://documentation.concretecms.org/developers/packages/adding-custom-code-to-packages
@@ -69,11 +72,28 @@ class Controller extends Package
 
     public function on_start()
     {
-        $corp = $this->getFileConfig()->get('security.cross_origin_resource_policy', false);
+        $config = $this->getFileConfig();
+        /** @var ServerInterface $server */
+        $server = $this->app->make(ServerInterface::class);
+
+        $corp = $config->get('security.cross_origin_resource_policy', false);
         if ($corp) {
-            /** @var ServerInterface $server */
-            $server = $this->app->make(ServerInterface::class);
             $server->addMiddleware($this->app->make(CrossOriginResourcePolicyMiddleware::class, ['config' => $corp]));
+        }
+
+        $coop = $config->get('security.cross_origin_opener_policy', false);
+        if ($coop) {
+            $server->addMiddleware($this->app->make(CrossOriginOpenerPolicyMiddleware::class, ['config' => $coop]));
+        }
+
+        $coep = $config->get('security.cross_origin_embedder_policy', false);
+        if ($coep) {
+            $server->addMiddleware($this->app->make(CrossOriginEmbedderPolicyMiddleware::class, ['config' => $coep]));
+        }
+
+        $accessControlAllowOrigin = $config->get('security.access_control_allow_origin', false);
+        if ($accessControlAllowOrigin) {
+            $server->addMiddleware($this->app->make(AccessControlAllowOriginPolicyMiddleware::class, ['config' => $accessControlAllowOrigin]));
         }
     }
 }
