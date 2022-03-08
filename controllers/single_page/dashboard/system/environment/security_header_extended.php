@@ -16,7 +16,7 @@ class SecurityHeaderExtended extends DashboardPageController
         $this->set('accessControlAllowOrigin', $this->getPackageConfig()->get('security.access_control_allow_origin'));
     }
 
-    protected function getPackageConfig(): ?Liaison
+    protected function getPackageConfig()
     {
         /** @var PackageService $packageService */
         $packageService = $this->app->make(PackageService::class);
