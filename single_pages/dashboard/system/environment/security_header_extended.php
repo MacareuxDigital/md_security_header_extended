@@ -6,27 +6,27 @@ defined('C5_EXECUTE') or die('Access Denied.');
 /** @var \Concrete\Core\Validation\CSRF\Token $token */
 /** @var \Concrete\Core\Form\Service\Form $form */
 
-$corp = $corp ?? null;
+$corp = isset($corp) ? $corp : null;
 $corpOptions = [
     '' => t('** Not Set'),
     'same-site' => 'same-site',
     'same-origin' => 'same-origin',
     'cross-origin' => 'cross-origin',
 ];
-$coop = $coop ?? null;
+$coop = isset($coop) ? $coop : null;
 $coopOptions = [
     '' => t('** Not Set'),
     'unsafe-none' => 'unsafe-none',
     'same-origin-allow-popups' => 'same-origin-allow-popups',
     'same-origin' => 'same-origin',
 ];
-$coep = $coep ?? null;
+$coep = isset($coep) ? $coep : null;
 $coepOptions = [
     '' => t('** Not Set'),
     'unsafe-none' => 'unsafe-none',
     'require-corp' => 'require-corp',
 ];
-$accessControlAllowOrigin = $accessControlAllowOrigin ?? null;
+$accessControlAllowOrigin = isset($accessControlAllowOrigin) ? $accessControlAllowOrigin : null;
 
 $site = app('site')->getSite();
 /* @var \Concrete\Core\Entity\Site\Site|null $site */
