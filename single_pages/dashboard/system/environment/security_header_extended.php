@@ -28,7 +28,8 @@ $coepOptions = [
 ];
 $accessControlAllowOrigin = isset($accessControlAllowOrigin) ? $accessControlAllowOrigin : null;
 
-$site = app('site')->getSite();
+$app = Concrete\Core\Support\Facade\Application::getFacadeApplication();
+$site = $app->make('site')->getSite();
 /* @var \Concrete\Core\Entity\Site\Site|null $site */
 ?>
 <div class="alert alert-warning">
