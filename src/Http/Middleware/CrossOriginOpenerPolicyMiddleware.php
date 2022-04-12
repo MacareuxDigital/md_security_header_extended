@@ -16,7 +16,7 @@ class CrossOriginOpenerPolicyMiddleware implements MiddlewareInterface
 
     private $config;
 
-    public function __construct(Strings $stringValidator, string $config)
+    public function __construct(Strings $stringValidator, $config)
     {
         $this->stringValidator = $stringValidator;
         $this->config = $config;

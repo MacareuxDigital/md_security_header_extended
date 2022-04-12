@@ -58,7 +58,7 @@ class SecurityHeaderExtended extends DashboardPageController
 
             $this->flash('success', t('The settings has been successfully updated.'));
 
-            return $this->buildRedirect([$this->getPageObject()]);
+            return $this->redirect('/dashboard/system/environment/security_header_extended');
         }
     }
 }
