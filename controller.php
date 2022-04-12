@@ -58,7 +58,7 @@ class Controller extends Package
      */
     public function getPackageDescription()
     {
-        return t('CORP header, etc.');
+        return t('This package makes you enable to add some security headers to mitigate some types of attacks.');
     }
 
     public function install()
