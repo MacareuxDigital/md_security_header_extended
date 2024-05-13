@@ -27,6 +27,7 @@ $coepOptions = [
     'require-corp' => 'require-corp',
 ];
 $accessControlAllowOrigin = isset($accessControlAllowOrigin) ? $accessControlAllowOrigin : null;
+$nosniff = isset($nosniff) ? $nosniff : false;
 
 $app = Concrete\Core\Support\Facade\Application::getFacadeApplication();
 $site = $app->make('site')->getSite();
@@ -86,6 +87,22 @@ $site = $app->make('site')->getSite();
             <p><?= t('See also:') ?></p>
             <ul>
                 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" target="_blank">MDN Web Docs: Access-Control-Allow-Origin</a></li>
+                <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html" target="_blank">OWASP Cheat Sheet Series: HTTP Security Response Headers Cheat Sheet</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?= $form->label('', t('X-Content-Type-Options')) ?>
+        <div class="form-check">
+            <?= $form->checkbox('nosniff', '1', $nosniff) ?>
+            <?= $form->label('nosniff', t('Enable X-Content-Type-Options (nosniff)')) ?>
+        </div>
+        <div class="help-block">
+            <p><?= t('The X-Content-Type-Options response header is used to protect against MIME type confusion attacks by ensuring that browsers do not interpret files as something other than their declared content type.') ?></p>
+            <p><?= t('See also:') ?></p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options" target="_blank">MDN Web Docs: X-Content-Type-Options</a></li>
                 <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html" target="_blank">OWASP Cheat Sheet Series: HTTP Security Response Headers Cheat Sheet</a></li>
             </ul>
         </div>

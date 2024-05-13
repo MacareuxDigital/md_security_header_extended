@@ -5,6 +5,7 @@ namespace Concrete\Package\MdSecurityHeaderExtended;
 use Concrete\Core\Http\ServerInterface;
 use Concrete\Core\Package\Package;
 use Macareux\SecurityHeaderExtended\Http\Middleware\AccessControlAllowOriginPolicyMiddleware;
+use Macareux\SecurityHeaderExtended\Http\Middleware\ContentTypeOptionsMiddleware;
 use Macareux\SecurityHeaderExtended\Http\Middleware\CrossOriginEmbedderPolicyMiddleware;
 use Macareux\SecurityHeaderExtended\Http\Middleware\CrossOriginOpenerPolicyMiddleware;
 use Macareux\SecurityHeaderExtended\Http\Middleware\CrossOriginResourcePolicyMiddleware;
@@ -94,6 +95,11 @@ class Controller extends Package
         $accessControlAllowOrigin = $config->get('security.access_control_allow_origin', false);
         if ($accessControlAllowOrigin) {
             $server->addMiddleware($this->app->make(AccessControlAllowOriginPolicyMiddleware::class, ['config' => $accessControlAllowOrigin]));
+        }
+
+        $nosniff = $config->get('security.x_content_type_options_nosniff', false);
+        if ($nosniff) {
+            $server->addMiddleware($this->app->make(ContentTypeOptionsMiddleware::class, ['config' => $nosniff]));
         }
     }
 }
