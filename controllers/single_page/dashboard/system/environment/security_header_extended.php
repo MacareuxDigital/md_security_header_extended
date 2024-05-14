@@ -14,7 +14,7 @@ class SecurityHeaderExtended extends DashboardPageController
         $this->set('coop', $this->getPackageConfig()->get('security.cross_origin_opener_policy'));
         $this->set('coep', $this->getPackageConfig()->get('security.cross_origin_embedder_policy'));
         $this->set('accessControlAllowOrigin', $this->getPackageConfig()->get('security.access_control_allow_origin'));
-        $this->set('nosniff', $this->getPackageConfig()->get('security.x_content_type_options_nosniff'));
+        $this->set('nosniff', $this->getPackageConfig()->get('security.x_content_type_options'));
     }
 
     protected function getPackageConfig()
@@ -48,7 +48,10 @@ class SecurityHeaderExtended extends DashboardPageController
             if (empty($accessControlAllowOrigin)) {
                 $accessControlAllowOrigin = false;
             }
-            $nosniff = (bool)$this->post('nosniff');
+            $nosniff = trim($this->post('nosniff'));
+            if (empty($nosniff)) {
+                $nosniff = false;
+            }
 
             $config = $this->getPackageConfig();
             $config->save('security', [
@@ -56,7 +59,7 @@ class SecurityHeaderExtended extends DashboardPageController
                 'cross_origin_opener_policy' => $coop,
                 'cross_origin_embedder_policy' => $coep,
                 'access_control_allow_origin' => $accessControlAllowOrigin,
-                'x_content_type_options_nosniff' => $nosniff,
+                'x_content_type_options' => $nosniff,
             ]);
 
             $this->flash('success', t('The settings has been successfully updated.'));

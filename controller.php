@@ -97,7 +97,7 @@ class Controller extends Package
             $server->addMiddleware($this->app->make(AccessControlAllowOriginPolicyMiddleware::class, ['config' => $accessControlAllowOrigin]));
         }
 
-        $nosniff = $config->get('security.x_content_type_options_nosniff', false);
+        $nosniff = $config->get('security.x_content_type_options', false);
         if ($nosniff) {
             $server->addMiddleware($this->app->make(ContentTypeOptionsMiddleware::class, ['config' => $nosniff]));
         }

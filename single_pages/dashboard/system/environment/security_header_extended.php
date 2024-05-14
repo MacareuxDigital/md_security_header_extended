@@ -95,8 +95,8 @@ $site = $app->make('site')->getSite();
     <div class="form-group">
         <?= $form->label('', t('X-Content-Type-Options')) ?>
         <div class="form-check">
-            <?= $form->checkbox('nosniff', '1', $nosniff) ?>
-            <?= $form->label('nosniff', t('Enable X-Content-Type-Options (nosniff)')) ?>
+            <?= $form->checkbox('nosniff', 'nosniff', $nosniff) ?>
+            <?= $form->label('nosniff', t('Enable X-Content-Type-Options')) ?>
         </div>
         <div class="help-block">
             <p><?= t('The X-Content-Type-Options response header is used to protect against MIME type confusion attacks by ensuring that browsers do not interpret files as something other than their declared content type.') ?></p>

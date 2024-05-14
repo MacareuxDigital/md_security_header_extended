@@ -4,14 +4,21 @@ namespace Macareux\SecurityHeaderExtended\Http\Middleware;
 
 use Concrete\Core\Http\Middleware\DelegateInterface;
 use Concrete\Core\Http\Middleware\MiddlewareInterface;
+use Concrete\Core\Utility\Service\Validation\Strings;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContentTypeOptionsMiddleware implements MiddlewareInterface
 {
+    /**
+     * @var Strings
+     */
+    private $stringValidator;
+
     private $config;
 
-    public function __construct($config)
+    public function __construct(Strings $stringValidator, $config)
     {
+        $this->stringValidator = $stringValidator;
         $this->config = $config;
     }
     /**
@@ -25,8 +32,8 @@ class ContentTypeOptionsMiddleware implements MiddlewareInterface
         $response = $frame->next($request);
 
         if ($response->headers->has('X-Content-Type-Options') === false) {
-            if ($this->config === true) {
-                $response->headers->set('X-Content-Type-Options', 'nosniff');
+            if ($this->stringValidator->notempty($this->config)) {
+                $response->headers->set('X-Content-Type-Options', $this->config);
             }
         }
 
