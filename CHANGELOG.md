@@ -1,5 +1,11 @@
 # Release Notes
 
+## [v1.2 (May 25, 2024)]
+
+### Improvements
+
+- Support X-Content-Type-Options header
+
 ## [v1.1 (April 13, 2022)]
 
 ### Fixes
