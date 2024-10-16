@@ -8,21 +8,28 @@ use Concrete\Core\Page\Controller\DashboardPageController;
 
 class SecurityHeaderExtended extends DashboardPageController
 {
+    protected $pkgConfig;
+
     public function view()
     {
-        $this->set('corp', $this->getPackageConfig()->get('security.cross_origin_resource_policy'));
-        $this->set('coop', $this->getPackageConfig()->get('security.cross_origin_opener_policy'));
-        $this->set('coep', $this->getPackageConfig()->get('security.cross_origin_embedder_policy'));
-        $this->set('accessControlAllowOrigin', $this->getPackageConfig()->get('security.access_control_allow_origin'));
-        $this->set('nosniff', $this->getPackageConfig()->get('security.x_content_type_options'));
+        $pkgConfig = $this->getPackageConfig();
+        $this->set('corp', $pkgConfig->get('security.cross_origin_resource_policy'));
+        $this->set('coop', $pkgConfig->get('security.cross_origin_opener_policy'));
+        $this->set('coep', $pkgConfig->get('security.cross_origin_embedder_policy'));
+        $this->set('accessControlAllowOrigin', $pkgConfig->get('security.access_control_allow_origin'));
+        $this->set('nosniff', $pkgConfig->get('security.x_content_type_options'));
     }
 
     protected function getPackageConfig()
     {
-        /** @var PackageService $packageService */
-        $packageService = $this->app->make(PackageService::class);
-        $package = $packageService->getClass('md_security_header_extended');
-        return $package->getFileConfig();
+        if (!$this->pkgConfig) {
+            /** @var PackageService $packageService */
+            $packageService = $this->app->make(PackageService::class);
+            $package = $packageService->getClass('md_security_header_extended');
+            $this->pkgConfig = $package->getFileConfig();
+        }
+
+        return $this->pkgConfig;
     }
 
     public function submit()
@@ -68,3 +75,4 @@ class SecurityHeaderExtended extends DashboardPageController
         }
     }
 }
+
