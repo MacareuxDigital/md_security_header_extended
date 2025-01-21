@@ -1,0 +1,6 @@
+{
+    "name": "macareuxdigital/md_security_header_extended",
+    "description": "Macareux Security Header Extended",
+    "type": "concrete5-package",
+    "license": "MIT"
+}
